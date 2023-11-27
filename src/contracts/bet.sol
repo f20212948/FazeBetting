@@ -1,3 +1,4 @@
+//SPDX-License-Identifier: MIT
 pragma solidity 0.8.11;
 
 import "./ownable.sol";
@@ -66,7 +67,7 @@ contract bet is ATM, Ownable {
 
         numBetsAddress[msg.sender]++;
         
-        (bool sent, bytes memory data) = conOwner.call{value: msg.value}("");
+        (bool sent, ) = conOwner.call{value: msg.value}("");
         require(sent, "Failed to send Ether");
 
         totalBetMoney += msg.value;
@@ -87,7 +88,7 @@ contract bet is ATM, Ownable {
                     console.log(receiver);
                     div = (bets[i].amount * (10000 + (getTotalBetAmount(1) * 10000 / getTotalBetAmount(0)))) / 10000;
 
-                    (bool sent, bytes memory data) = receiver.call{ value: div }("");
+                    (bool sent,) = receiver.call{ value: div }("");
                     require(sent, "Failed to send Ether");
                     
                 }
@@ -100,7 +101,7 @@ contract bet is ATM, Ownable {
                     console.log(getTotalBetAmount(0));
                     console.log(div);
 
-                    (bool sent, bytes memory data) = receiver.call{ value: div }("");
+                    (bool sent, ) = receiver.call{ value: div }("");
                     require(sent, "Failed to send Ether");
                 }
             }

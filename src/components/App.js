@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Web3 from 'web3'
-import logo from '../logo.png';
+// import logo from '../logo.png';
 import './App.css';
 import bet from '../abis/bet.json'
 import Navbar from './Navbar'
@@ -9,29 +9,33 @@ import Main from './Main'
 class App extends Component {
 
   async componentWillMount() {
-    await this.loadWeb3();
-    await this.loadBlockchainData();
+    // Detect Metamask
+    const metamaskInstalled = typeof window.web3 !== 'undefined'
+    this.setState({ metamaskInstalled })
+    if(metamaskInstalled) {
+      await this.loadWeb3()
+      await this.loadBlockchainData()
+    }
   }
-  
+
   async loadWeb3() {
     if (window.ethereum) {
-        window.web3 = new Web3(window.ethereum);
-        await window.ethereum.enable();
+      window.web3 = new Web3(window.ethereum)
+      await window.ethereum.enable()
     }
     else if (window.web3) {
-        window.web3 = new Web3(window.web3.currentProvider);
+      window.web3 = new Web3(window.web3.currentProvider)
     }
     else {
-        window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+      // DO NOTHING...
     }
   }
 
   async loadBlockchainData() {
     const web3 = window.web3
-
+    // Load account
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
-
     const networkId = await web3.eth.net.getId()
     const networkData = bet.networks[networkId]
     if (networkData) {
@@ -53,7 +57,7 @@ class App extends Component {
       window.alert("Bet contract not deployed to detected network")
     }
 
-  }
+  }   
 
   constructor(props) {
     super(props)

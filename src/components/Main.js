@@ -35,7 +35,7 @@ class Main extends Component {
         // let team1amt = this.getTotalBetAmount(1);
 
         return (
-        <div id="content">
+        <div id="content" >
 
             <h1>Place Bet</h1>
             
@@ -149,7 +149,7 @@ class Main extends Component {
                 <tr>
                 <th scope="row">0</th>
                 <td></td>
-                <td><img src={gsw} height="100px" /></td>
+                <td><img src={gsw} height="100px" alt=""/></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -160,7 +160,7 @@ class Main extends Component {
                 <tr>
                 <th scope="row">1</th>
                 <td></td>
-                <td><img src={bkn} height="110px" /></td>
+                <td><img src={bkn} height="110px" alt=""/></td>
                 <td></td>
                 <td></td>
                 <td></td>
